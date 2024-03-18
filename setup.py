@@ -14,11 +14,11 @@ import sys
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
-    long_description = f.read()
+# with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+#     long_description = f.read()
 
 dependencies = [
-    'elasticsearch',
+    'elasticsearch==7.17.9',
     'requests'
 ]
 
@@ -29,7 +29,7 @@ if sys.version_info <= (3,4):
 print("List of dependencies : {0}".format(str(dependencies)))
 
 setup(
-    name='CMRESHandler',
+    name='LoggingEsHandler',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
@@ -37,14 +37,14 @@ setup(
     version='1.0.0',
 
     description='Elasticsearch Log handler for the logging library',
-    long_description=long_description,
+    # long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/cmanaha/python-elasticsearch-logger',
+    url='https://github.com/smockgithub/python-elasticsearch-logger',
 
     # Author details
-    author='Carlos Manzanedo Rueda',
-    author_email='c.manaha@gmail.com',
+    author='smock',
+    author_email='',
 
     # Choose your license
     license='Apache2',
