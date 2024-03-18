@@ -1,6 +1,6 @@
 
 ===============
-CMRESHandler.py
+LoggingEsHandler.py
 ===============
 
 |  |license| |versions| |status| |downloads|
@@ -24,7 +24,7 @@ Installation
 ============
 Install using pip::
 
-    pip install CMRESHandler
+    pip install LoggingEsHandler
 
 Requirements Python 2
 =====================
@@ -54,9 +54,9 @@ Using the handler in  your program
 ==================================
 To initialise and create the handler, just add the handler to your logger as follow ::
 
-    from cmreslogging.handlers import CMRESHandler
-    handler = CMRESHandler(hosts=[{'host': 'localhost', 'port': 9200}],
-                               auth_type=CMRESHandler.AuthType.NO_AUTH,
+    from cmreslogging.handlers import LoggingEsHandler
+    handler = LoggingEsHandler(hosts=[{'host': 'localhost', 'port': 9200}],
+                               auth_type=LoggingEsHandler.AuthType.NO_AUTH,
                                es_index_name="my_python_index")
     log = logging.getLogger("PythonTest")
     log.setLevel(logging.INFO)
@@ -64,9 +64,9 @@ To initialise and create the handler, just add the handler to your logger as fol
 
 You can add fields upon initialisation, providing more data of the execution context ::
 
-    from cmreslogging.handlers import CMRESHandler
-    handler = CMRESHandler(hosts=[{'host': 'localhost', 'port': 9200}],
-                               auth_type=CMRESHandler.AuthType.NO_AUTH,
+    from cmreslogging.handlers import LoggingEsHandler
+    handler = LoggingEsHandler(hosts=[{'host': 'localhost', 'port': 9200}],
+                               auth_type=LoggingEsHandler.AuthType.NO_AUTH,
                                es_index_name="my_python_index",
                                es_additional_fields={'App': 'MyAppName', 'Environment': 'Dev'})
     log = logging.getLogger("PythonTest")
@@ -100,11 +100,11 @@ The constructors takes the following parameters:
     [{'host':'host1','port':9200}, {'host':'host2','port':9200}]
 
 
- - auth_type: The authentication currently support CMRESHandler.AuthType = NO_AUTH, BASIC_AUTH, KERBEROS_AUTH
- - auth_details: When CMRESHandler.AuthType.BASIC_AUTH is used this argument must contain a tuple of string with the user and password that will be used to authenticate against the Elasticsearch servers, for example ('User','Password')
- - aws_access_key: When ``CMRESHandler.AuthType.AWS_SIGNED_AUTH`` is used this argument must contain the AWS key id of the  the AWS IAM user
- - aws_secret_key: When ``CMRESHandler.AuthType.AWS_SIGNED_AUTH`` is used this argument must contain the AWS secret key of the  the AWS IAM user
- - aws_region: When ``CMRESHandler.AuthType.AWS_SIGNED_AUTH`` is used this argument must contain the AWS region of the  the AWS Elasticsearch servers, for example ``'us-east'``
+ - auth_type: The authentication currently support LoggingEsHandler.AuthType = NO_AUTH, BASIC_AUTH, KERBEROS_AUTH
+ - auth_details: When LoggingEsHandler.AuthType.BASIC_AUTH is used this argument must contain a tuple of string with the user and password that will be used to authenticate against the Elasticsearch servers, for example ('User','Password')
+ - aws_access_key: When ``LoggingEsHandler.AuthType.AWS_SIGNED_AUTH`` is used this argument must contain the AWS key id of the  the AWS IAM user
+ - aws_secret_key: When ``LoggingEsHandler.AuthType.AWS_SIGNED_AUTH`` is used this argument must contain the AWS secret key of the  the AWS IAM user
+ - aws_region: When ``LoggingEsHandler.AuthType.AWS_SIGNED_AUTH`` is used this argument must contain the AWS region of the  the AWS Elasticsearch servers, for example ``'us-east'``
  - use_ssl: A boolean that defines if the communications should use SSL encrypted communication
  - verify_ssl: A boolean that defines if the SSL certificates are validated or not
  - buffer_size: An int, Once this size is reached on the internal buffer results are flushed into ES
@@ -112,8 +112,8 @@ The constructors takes the following parameters:
  - es_index_name: A string with the prefix of the elasticsearch index that will be created. Note a date with
    YYYY.MM.dd, ``python_logger`` used by default
  - index_name_frequency: The frequency to use as part of the index naming. Currently supports
-   CMRESHandler.IndexNameFrequency.DAILY, CMRESHandler.IndexNameFrequency.WEEKLY,
-   CMRESHandler.IndexNameFrequency.MONTHLY, CMRESHandler.IndexNameFrequency.YEARLY by default the daily rotation
+   LoggingEsHandler.IndexNameFrequency.DAILY, LoggingEsHandler.IndexNameFrequency.WEEKLY,
+   LoggingEsHandler.IndexNameFrequency.MONTHLY, LoggingEsHandler.IndexNameFrequency.YEARLY by default the daily rotation
    is used
  - es_doc_type: A string with the name of the document type that will be used ``python_log`` used by default
  - es_additional_fields: A dictionary with all the additional fields that you would like to add to the logs
@@ -124,7 +124,7 @@ It is also very easy to integrate the handler to `Django <https://www.djangoproj
 better, at DEBUG level django logs information such as how long it takes for DB connections to return so
 they can be plotted on Kibana, or the SQL statements that Django executed. ::
 
-    from cmreslogging.handlers import CMRESHandler
+    from cmreslogging.handlers import LoggingEsHandler
     LOGGING = {
         'version': 1,
         'disable_existing_loggers': False,
@@ -138,11 +138,11 @@ they can be plotted on Kibana, or the SQL statements that Django executed. ::
             },
             'elasticsearch': {
                 'level': 'DEBUG',
-                'class': 'cmreslogging.handlers.CMRESHandler',
+                'class': 'cmreslogging.handlers.LoggingEsHandler',
                 'hosts': [{'host': 'localhost', 'port': 9200}],
                 'es_index_name': 'my_python_app',
                 'es_additional_fields': {'App': 'Test', 'Environment': 'Dev'},
-                'auth_type': CMRESHandler.AuthType.NO_AUTH,
+                'auth_type': LoggingEsHandler.AuthType.NO_AUTH,
                 'use_ssl': False,
             },
         },
@@ -182,17 +182,17 @@ Contributing back
 Feel free to use this as is or even better, feel free to fork and send your pull requests over.
 
 
-.. |downloads| image:: https://img.shields.io/pypi/dd/CMRESHandler.svg
-    :target: https://pypi.python.org/pypi/CMRESHandler
+.. |downloads| image:: https://img.shields.io/pypi/dd/LoggingEsHandler.svg
+    :target: https://pypi.python.org/pypi/LoggingEsHandler
     :alt: Daily PyPI downloads
-.. |versions| image:: https://img.shields.io/pypi/pyversions/CMRESHandler.svg
-    :target: https://pypi.python.org/pypi/CMRESHandler
+.. |versions| image:: https://img.shields.io/pypi/pyversions/LoggingEsHandler.svg
+    :target: https://pypi.python.org/pypi/LoggingEsHandler
     :alt: Python versions supported
-.. |status| image:: https://img.shields.io/pypi/status/CMRESHandler.svg
-    :target: https://pypi.python.org/pypi/CMRESHandler
+.. |status| image:: https://img.shields.io/pypi/status/LoggingEsHandler.svg
+    :target: https://pypi.python.org/pypi/LoggingEsHandler
     :alt: Package stability
-.. |license| image:: https://img.shields.io/pypi/l/CMRESHandler.svg
-    :target: https://pypi.python.org/pypi/CMRESHandler
+.. |license| image:: https://img.shields.io/pypi/l/LoggingEsHandler.svg
+    :target: https://pypi.python.org/pypi/LoggingEsHandler
     :alt: License
 .. |ci_status| image:: https://travis-ci.org/cmanaha/python-elasticsearch-logger.svg?branch=master
     :target: https://travis-ci.org/cmanaha/python-elasticsearch-logger
